@@ -30,7 +30,7 @@ func CreateProduct(c *gin.Context) {
 	}
 
 	// Return it
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"product": product,
 	})
 }
@@ -43,6 +43,27 @@ func GetProducts(c *gin.Context) {
 	// Respond with them
 	c.JSON(http.StatusOK, gin.H{
 		"products": products,
+	})
+}
+
+func GetProductByID(c *gin.Context) {
+	// Get the id off the url
+	id := c.Param("id")
+
+	// Get the product
+	product := []models.Product{}
+	find := initializers.DB.First(&product, id)
+	if find.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Product not found",
+		})
+		return
+
+	}
+
+	// Respond with them
+	c.JSON(http.StatusOK, gin.H{
+		"product": product,
 	})
 }
 

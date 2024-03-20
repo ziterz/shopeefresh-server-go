@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/ziterz/shopeefresh-server-go/controllers"
 	"github.com/ziterz/shopeefresh-server-go/initializers"
@@ -13,12 +14,15 @@ func init() {
 }
 
 func main() {
+
 	r := gin.Default()
+	r.Use(cors.Default())
 	r.POST("/register", controllers.Register)
 	r.POST("/login", controllers.Login)
-	r.POST("/products", middlewares.Authentication, controllers.CreateProduct)
-	r.GET("/products", middlewares.Authentication, controllers.GetProducts)
+	r.POST("/products", controllers.CreateProduct)
+	r.GET("/products", controllers.GetProducts)
+	r.GET("/products/:id", controllers.GetProductByID)
 	r.PUT("/products/:id", middlewares.Authentication, controllers.UpdateProduct)
-	r.DELETE("/products/:id", middlewares.Authentication, controllers.DeleteProduct)
+	r.DELETE("/products/:id", controllers.DeleteProduct)
 	r.Run()
 }
