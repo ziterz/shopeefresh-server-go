@@ -13,6 +13,7 @@ func CreateProduct(c *gin.Context) {
 		Name  string
 		Image string
 		Price int
+		Stock int
 	}
 	c.Bind(&body)
 
@@ -21,6 +22,7 @@ func CreateProduct(c *gin.Context) {
 		Name:  body.Name,
 		Image: body.Image,
 		Price: body.Price,
+		Stock: body.Stock,
 	}
 	result := initializers.DB.Create(&product)
 
@@ -76,6 +78,7 @@ func UpdateProduct(c *gin.Context) {
 		Name  string
 		Image string
 		Price int
+		Stock int
 	}
 	c.Bind(&body)
 
@@ -88,6 +91,7 @@ func UpdateProduct(c *gin.Context) {
 		Name:  body.Name,
 		Image: body.Image,
 		Price: body.Price,
+		Stock: body.Stock,
 	})
 
 	if result.Error != nil {
