@@ -6,5 +6,6 @@ type Product struct {
 	gorm.Model
 	Name  string
 	Image string
+	Stock int
 	Price int
 }

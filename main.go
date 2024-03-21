@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/ziterz/shopeefresh-server-go/controllers"
 	"github.com/ziterz/shopeefresh-server-go/initializers"
-	"github.com/ziterz/shopeefresh-server-go/middlewares"
 )
 
 func init() {
@@ -22,7 +21,7 @@ func main() {
 	r.POST("/products", controllers.CreateProduct)
 	r.GET("/products", controllers.GetProducts)
 	r.GET("/products/:id", controllers.GetProductByID)
-	r.PUT("/products/:id", middlewares.Authentication, controllers.UpdateProduct)
+	r.PUT("/products/:id", controllers.UpdateProduct)
 	r.DELETE("/products/:id", controllers.DeleteProduct)
 	r.Run()
 }
